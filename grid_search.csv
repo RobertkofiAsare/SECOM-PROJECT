@@ -1,0 +1,2 @@
+outlier,knn_k,max_depth,cv_cost,cv_auc
+cap,5,,12000.0,0.6520887034775923

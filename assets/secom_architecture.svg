@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1060" viewBox="0 0 1440 1060" role="img" aria-labelledby="title description">
+  <title id="title">SECOM fault detection project architecture</title>
+  <desc id="description">A colored architecture diagram showing the UCI SECOM data split, training-only preprocessing and model fitting, optional cross-validation, held-out test evaluation, and saved outputs.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748b"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#059669"/>
+    </marker>
+    <style>
+      text { font-family: "Segoe UI", Arial, sans-serif; fill: #172554; }
+      .title { font-size: 30px; font-weight: 700; letter-spacing: 1px; }
+      .subtitle { font-size: 15px; fill: #475569; }
+      .card-title { font-size: 17px; font-weight: 700; }
+      .body { font-size: 14px; fill: #334155; }
+      .small { font-size: 12px; fill: #475569; }
+      .lane-title { font-size: 18px; font-weight: 700; }
+      .lane-subtitle { font-size: 13px; fill: #475569; }
+      .output-title { font-size: 15px; font-weight: 700; }
+      .output-body { font-size: 12px; fill: #475569; }
+    </style>
+  </defs>
+
+  <rect width="1440" height="1060" fill="#f8fafc"/>
+  <rect x="0" y="0" width="1440" height="12" fill="#2563eb"/>
+  <text x="720" y="57" text-anchor="middle" class="title">SECOM FAULT DETECTION</text>
+  <text x="720" y="84" text-anchor="middle" class="subtitle">Leak-free machine-learning workflow | CRISP-DM analysis architecture</text>
+
+  <rect x="510" y="112" width="420" height="78" rx="14" fill="#172554"/>
+  <text x="720" y="144" text-anchor="middle" font-size="18" font-weight="700" fill="#ffffff">UCI SECOM DATASET</text>
+  <text x="720" y="169" text-anchor="middle" font-size="14" fill="#dbeafe">590 sensor features · pass/fail labels · timestamps</text>
+
+  <path d="M720 190 V216" stroke="#64748b" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="510" y="223" width="420" height="76" rx="14" fill="#e0f2fe" stroke="#38bdf8" stroke-width="2"/>
+  <text x="720" y="253" text-anchor="middle" class="card-title">Load data &amp; stratified split</text>
+  <text x="720" y="278" text-anchor="middle" class="body">80% training set · 20% held-out test set</text>
+
+  <path d="M620 299 C560 326 430 330 430 375" fill="none" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow-blue)"/>
+  <path d="M820 299 C890 326 1110 330 1110 375" fill="none" stroke="#059669" stroke-width="3" marker-end="url(#arrow-green)"/>
+
+  <rect x="40" y="380" width="860" height="442" rx="18" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+  <text x="70" y="418" class="lane-title" fill="#1d4ed8">TRAINING WORKFLOW</text>
+  <text x="70" y="441" class="lane-subtitle">Fit all learned steps on training data only</text>
+
+  <rect x="930" y="380" width="470" height="442" rx="18" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
+  <text x="960" y="418" class="lane-title" fill="#047857">HELD-OUT TEST WORKFLOW</text>
+  <text x="960" y="441" class="lane-subtitle">Apply the fitted pipeline; evaluate once</text>
+
+  <rect x="70" y="474" width="235" height="132" rx="12" fill="#ffffff" stroke="#60a5fa" stroke-width="2"/>
+  <rect x="70" y="474" width="235" height="8" rx="4" fill="#3b82f6"/>
+  <text x="187.5" y="512" text-anchor="middle" class="card-title">1 · Preprocess</text>
+  <text x="187.5" y="539" text-anchor="middle" class="body">Column filtering · 3σ</text>
+  <text x="187.5" y="560" text-anchor="middle" class="body">Min-max scaling · kNN</text>
+  <text x="187.5" y="584" text-anchor="middle" class="small">Fit thresholds and transforms</text>
+
+  <path d="M305 540 H337" stroke="#64748b" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="345" y="474" width="235" height="132" rx="12" fill="#ffffff" stroke="#60a5fa" stroke-width="2"/>
+  <rect x="345" y="474" width="235" height="8" rx="4" fill="#6366f1"/>
+  <text x="462.5" y="512" text-anchor="middle" class="card-title">2 · Select &amp; balance</text>
+  <text x="462.5" y="541" text-anchor="middle" class="body">Boruta feature selection</text>
+  <text x="462.5" y="565" text-anchor="middle" class="body">SMOTE on training only</text>
+  <text x="462.5" y="586" text-anchor="middle" class="small">No resampling of test data</text>
+
+  <path d="M580 540 H612" stroke="#64748b" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="620" y="474" width="245" height="132" rx="12" fill="#ffffff" stroke="#60a5fa" stroke-width="2"/>
+  <rect x="620" y="474" width="245" height="8" rx="4" fill="#8b5cf6"/>
+  <text x="742.5" y="512" text-anchor="middle" class="card-title">3 · Train classifier</text>
+  <text x="742.5" y="541" text-anchor="middle" class="body">Random forest</text>
+  <text x="742.5" y="566" text-anchor="middle" class="body">Fit on balanced train set</text>
+  <text x="742.5" y="587" text-anchor="middle" class="small">Output: fitted model</text>
+
+  <rect x="202" y="648" width="506" height="112" rx="12" fill="#fff7ed" stroke="#fdba74" stroke-width="2"/>
+  <rect x="202" y="648" width="506" height="8" rx="4" fill="#f97316"/>
+  <text x="455" y="684" text-anchor="middle" class="card-title">OPTIONAL · TRAIN-ONLY GRID SEARCH</text>
+  <text x="455" y="710" text-anchor="middle" class="body">Stratified 3-fold cross-validation compares configurations</text>
+  <text x="455" y="735" text-anchor="middle" class="small">Select parameters by CV cost; never use test results for tuning</text>
+  <path d="M455 648 V626 H187 V609" fill="none" stroke="#f97316" stroke-width="2.5" stroke-dasharray="7 6" marker-end="url(#arrow)"/>
+  <path d="M455 648 V626 H742 V609" fill="none" stroke="#f97316" stroke-width="2.5" stroke-dasharray="7 6" marker-end="url(#arrow)"/>
+
+  <rect x="965" y="474" width="400" height="78" rx="12" fill="#ffffff" stroke="#34d399" stroke-width="2"/>
+  <rect x="965" y="474" width="400" height="8" rx="4" fill="#10b981"/>
+  <text x="1165" y="510" text-anchor="middle" class="card-title">Apply fitted preprocessing</text>
+  <text x="1165" y="533" text-anchor="middle" class="small">Use training-fitted columns, limits, scaler and imputer</text>
+
+  <path d="M1165 552 V575" stroke="#059669" stroke-width="3" marker-end="url(#arrow-green)"/>
+  <rect x="965" y="584" width="400" height="74" rx="12" fill="#ffffff" stroke="#34d399" stroke-width="2"/>
+  <rect x="965" y="584" width="400" height="8" rx="4" fill="#06b6d4"/>
+  <text x="1165" y="621" text-anchor="middle" class="card-title">Predict test-set probabilities</text>
+  <text x="1165" y="643" text-anchor="middle" class="small">Random forest · no test-set fitting or SMOTE</text>
+
+  <path d="M1165 658 V681" stroke="#059669" stroke-width="3" marker-end="url(#arrow-green)"/>
+  <rect x="965" y="690" width="400" height="96" rx="12" fill="#ffffff" stroke="#34d399" stroke-width="2"/>
+  <rect x="965" y="690" width="400" height="8" rx="4" fill="#059669"/>
+  <text x="1165" y="727" text-anchor="middle" class="card-title">Final evaluation</text>
+  <text x="1165" y="752" text-anchor="middle" class="body">Confusion matrix · recall · precision · F1 · AUC</text>
+  <text x="1165" y="773" text-anchor="middle" class="small">Report cost using the fixed decision threshold</text>
+
+  <path d="M865 540 H920 V620 H955" fill="none" stroke="#7c3aed" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="900" y="526" text-anchor="middle" class="small" fill="#6d28d9">fitted model</text>
+  <path d="M865 574 H925 V648 H955" fill="none" stroke="#2563eb" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrow-blue)"/>
+
+  <rect x="40" y="850" width="1360" height="166" rx="18" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="75" y="887" class="lane-title">DELIVERABLES</text>
+
+  <rect x="75" y="910" width="390" height="76" rx="10" fill="#f1f5f9" stroke="#cbd5e1"/>
+  <text x="270" y="941" text-anchor="middle" class="output-title">Training-set evidence</text>
+  <text x="270" y="966" text-anchor="middle" class="output-body">EDA figures · preprocessing SIP counts</text>
+
+  <rect x="525" y="910" width="390" height="76" rx="10" fill="#fff7ed" stroke="#fdba74"/>
+  <text x="720" y="941" text-anchor="middle" class="output-title">Tuning evidence (optional)</text>
+  <text x="720" y="966" text-anchor="middle" class="output-body">Cross-validation trial results CSV</text>
+
+  <rect x="975" y="910" width="390" height="76" rx="10" fill="#ecfdf5" stroke="#86efac"/>
+  <text x="1170" y="941" text-anchor="middle" class="output-title">Final test results</text>
+  <text x="1170" y="966" text-anchor="middle" class="output-body">Metrics CSV · ROC curve · total cost</text>
+
+  <path d="M187 606 V836 H270 V900" fill="none" stroke="#94a3b8" stroke-width="1.8" stroke-dasharray="5 5" marker-end="url(#arrow)"/>
+  <path d="M455 760 V836 H720 V900" fill="none" stroke="#f97316" stroke-width="1.8" stroke-dasharray="5 5" marker-end="url(#arrow)"/>
+  <path d="M1165 786 V900" fill="none" stroke="#059669" stroke-width="1.8" stroke-dasharray="5 5" marker-end="url(#arrow-green)"/>
+</svg>

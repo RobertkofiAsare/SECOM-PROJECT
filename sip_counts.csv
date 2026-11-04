@@ -1,0 +1,5 @@
+step,before,after
+remove constant columns,590,474
+remove duplicate columns,474,474
+remove columns with >60% NaN,474,450
+3-sigma (cap) + min-max + kNN impute (k=5),450,450
