@@ -4,7 +4,7 @@ SECOM case study - end-to-end pipeline (CRISP-DM, HTW Berlin MPMD).
 Pipeline: Split -> Preprocessing -> Feature selection -> Balancing -> Training -> Evaluation.
 Rule: every parameter is learned on the TRAINING set only and applied unchanged to the test set.
 
-Usage:  python src/secom_analysis.py [--quick] [--grid]
+Usage:  python secom_analysis.py [--quick] [--grid]
 Env:    SECOM_LOCAL_DIR=<folder with secom.data / secom_labels.data> (offline testing only;
         the submitted run downloads the data from UCI at runtime)
 """
@@ -42,7 +42,7 @@ from boruta import BorutaPy
 # ---------------------------------------------------------------- 1. Configuration
 SEED = 42
 URL = "https://archive.ics.uci.edu/static/public/179/secom.zip"
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parent
 FIG, TAB = ROOT / "results" / "figures", ROOT / "results" / "tables"
 COST_TYPE_I, COST_TYPE_II = 100, 400   # Type I = false alarm (pass flagged fail); Type II = missed fail
 MISSING_THRESHOLD = 0.60               # manual: start with 60 % (papers use 55 %)
